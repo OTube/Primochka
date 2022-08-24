@@ -14,7 +14,7 @@ public class UtuakPngLoader {
         if (to - from >= 0) System.arraycopy(u, from, v, 0, to - from);
         return v;
     }
-    int from_bytes(byte[] bytes){
+    private int from_bytes(byte[] bytes){
         return (bytes[0]<<24)&0xff000000|(bytes[1]<<16)&0x00ff0000|(bytes[2]<< 8)&0x0000ff00|(bytes[3])&0x000000ff;
         //return ByteBuffer.wrap(bytes).getInt();
     }
