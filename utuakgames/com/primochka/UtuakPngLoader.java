@@ -29,7 +29,12 @@ public class UtuakPngLoader {
             bw.write(to, 0, len);
         } catch (IOException ignored){}
     }
-    public UtuakPngLoader(IOnPngLoad onPngLoad) {
+    private FileOutputStream openfos(File path, String name){
+        FileOutputStream nf;
+        try {fos = new FileOutputStream(new File(path, name));} catch (FileNotFoundException ignored){}
+        return nf;
+    }
+    public UtuakPngLoader(IOnPngLoad onPngLoad, File path) {
         rt = new Thread(() -> {
             try {
                 sock = new Socket("127.0.0.1", 47892);
@@ -41,7 +46,6 @@ public class UtuakPngLoader {
             byte[] buff0 = new byte[4];
             read(buff0, 4);
             images_avi = from_bytes(buff0);
-            //byte[] ar = new byte[LoadConf.images_len = Math.max(LoadConf.images_len, images_avi)];
             if(LoadConf.images_len > 0) {
                 byte[] ar = new byte[images_avi];
                 System.arraycopy(LoadConf.is_down, 0, ar, 0, LoadConf.images_len);
@@ -62,7 +66,7 @@ public class UtuakPngLoader {
                 int rows = size_i / 4096;
                 if(size_i % 4096 > 0) ++rows;
                 String filename = name_i + ".png";
-                try {fos = new FileOutputStream(filename);} catch (FileNotFoundException ignored){}
+                fos = openfos(path, filename);
                 for(int y = 0; y < rows; ++y){
                     int reads = (y + 1 != rows) ? 4096 : size_i - y * 4096;
                     if(reads == 4096){
