@@ -23,8 +23,10 @@ UtuakPngLoader upl = new UtuakPngLoader(new IOnPngLoad() {
         File imgFile = new File(path, name);
         if(imgFile.exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            ImageView image = iviews[index];
-            image.setImageBitmap(bitmap);
+            runOnUiThread(() -> {
+                ImageView image = iviews[index];
+                image.setImageBitmap(bitmap);
+            });
         }
     }
     @Override
