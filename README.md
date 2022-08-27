@@ -43,7 +43,7 @@ public class UtuakPngLoader
 ```
 Загрузчик изображений с серверов Utuak Games
 ```java
-public UtuakPngLoader(IOnPngLoad onPngLoad, File path)
+public UtuakPngLoader(IOnPngLoad onPngLoad, String ip, int port)
 ```
 Создаёт загрузчик и определяет события загрузки
 ```java
