@@ -9,14 +9,15 @@
 ```
 ### Java code
 ```java
-import utuakgames.com.primochka.*;
+import com.utuakgames.primochka.*;
 ```
 
 ## Использование:
 
 ```java
+File path = getExternalFilesDir(null); //File path = getExternalCacheDir();
+LoadConf.dir = path;
 LoadConf.loadConfig();
-File path = getExternalFilesDir(null);
 UtuakPngLoader upl = new UtuakPngLoader(new IOnPngLoad() {
     @Override
     public void onLoad(int index, String name) {
@@ -33,7 +34,7 @@ UtuakPngLoader upl = new UtuakPngLoader(new IOnPngLoad() {
     public void onAllLoad() {
         LoadConf.saveConfig();
     }
-}, path);
+}, "127.0.0.1", 47892);
 ```
 
 # Primochka API
