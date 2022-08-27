@@ -8,7 +8,6 @@ public class UtuakPngLoader {
     private InputStream br;
     private OutputStream bw;
     private FileOutputStream fos;
-    private final Thread rt;
     private byte[] cut(byte[] u, int from, int to){
         byte[] v = new byte[to - from];
         if (to - from >= 0) System.arraycopy(u, from, v, 0, to - from);
@@ -30,7 +29,7 @@ public class UtuakPngLoader {
         } catch (IOException ignored){}
     }
     public UtuakPngLoader(IOnPngLoad onPngLoad, String ip, int port) {
-        rt = new Thread(() -> {
+        new Thread(() -> {
             try {
                 sock = new Socket(ip, port);
                 br = sock.getInputStream();
@@ -85,11 +84,8 @@ public class UtuakPngLoader {
                 bw.close();
                 br.close();
                 sock.close();
+                Thread.currentThread().interrupt();
             } catch (IOException ignored){}
-        });
-        rt.start();
-    }
-    public void destroy(){
-        rt.interrupt();
+        }).start();
     }
 }
