@@ -15,13 +15,12 @@ import com.utuakgames.primochka.*;
 ## Использование:
 
 ```java
-File path = getExternalFilesDir(null); //File path = getExternalCacheDir();
-LoadConf.dir = path;
+LoadConf.dir = getExternalFilesDir(null);
 LoadConf.loadConfig();
 UtuakPngLoader upl = new UtuakPngLoader(new IOnPngLoad() {
     @Override
     public void onLoad(int index, String name) {
-        File imgFile = new File(path, name);
+        File imgFile = new File(LoadConf.dir, name);
         if(imgFile.exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             runOnUiThread(() -> {
