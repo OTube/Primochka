@@ -16,7 +16,7 @@ import utuakgames.com.primochka.*;
 
 ```java
 LoadConf.loadConfig();
-File path = context.getFilesDir();
+File path = getExternalFilesDir(null);
 UtuakPngLoader upl = new UtuakPngLoader(new IOnPngLoad() {
     @Override
     public void onLoad(int index, String name) {
